@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 
+#makes windows 10&11 read css not plain text.
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -20,15 +25,15 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     # Built-in Django apps
-    'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -159,7 +164,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = None  # Placeholder
 AWS_S3_REGION_NAME = None       # Placeholder
 AWS_S3_ADDRESSING_STYLE = "virtual"
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = None
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = 'public-read' # Use S3 bucket's setting
@@ -170,14 +175,6 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
-STORAGES = {
-    "default": {
-        "BACKEND": "djangojokes.storage_backends.PublicMediaStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "djangojokes.storage_backends.StaticStorage",
-    },
-}
 
 PRIVATE_FILE_STORAGE = 'djangojokes.storage_backends.PrivateMediaStorage'
 
