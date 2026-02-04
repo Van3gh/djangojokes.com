@@ -28,6 +28,12 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
+# Necessary for the Debug Toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +53,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'debug_toolbar',
 
     # Local apps
     'common.apps.CommonConfig',
@@ -69,6 +76,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',# Debug Toolbar
 ]
 
 ROOT_URLCONF = 'djangojokes.urls'
