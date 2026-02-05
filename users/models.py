@@ -24,5 +24,5 @@ class CustomUser(AbstractUser):
         return reverse('my-account')
 
 
-    def __Str__(self):
+    def __str__(self):
         return f'{self.first_name} {self.last_name} ({self.username})'

@@ -34,8 +34,12 @@ class JokeAdmin(DjangoJokesAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj:#editing an existing object
-            return ('slug', 'created', 'updated')
+            return ('slug', 'created', 'updated', 'vote_summary')
         return()
+
+
+    def vote_summary(self, obj):
+        return f'{obj.num_votes} votes. Rating: {obj.rating}.'
 
 
 @admin.register(JokeVote)
@@ -54,9 +58,6 @@ class JokeVoteAdmin(DjangoJokesAdmin):
 class TagAdmin(DjangoJokesAdmin):
     model = Tag
     list_display = ['tag', 'created', 'updated']
-
-
-    #form Attributes
     search_fields = ['tag']
 
 
